@@ -82,6 +82,9 @@ importers:
 
   packages/emdash:
     devDependencies:
+      '@emdash-cms/blocks':
+        specifier: 1.0.1
+        version: 1.0.1(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(zod@4.5.4)
       '@emdash-cms/plugin-cli':
         specifier: 0.13.1
         version: 0.13.1(@atcute/cbor@2.3.8(@atcute/cid@2.5.0))(@atcute/cid@2.5.0)(@atcute/identity@2.0.2(@atcute/lexicons@2.1.1)(typescript@5.9.3))(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)

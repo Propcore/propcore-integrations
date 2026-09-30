@@ -5,7 +5,19 @@
   "description": "EmDash CMS plugin: your Propcore catalog (projects, units, live availability) in an EmDash site",
   "license": "MIT",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./sandbox": "./dist/plugin.mjs"
+  },
+  "files": [
+    "dist",
+    "emdash-plugin.jsonc"
+  ],
   "scripts": {
+    "dev": "emdash-plugin dev",
     "build": "emdash-plugin build",
     "bundle": "emdash-plugin bundle",
     "validate": "emdash-plugin validate",
@@ -13,6 +25,7 @@
     "test": "vitest run --passWithNoTests && vitest run -c vitest.node.config.ts"
   },
   "devDependencies": {
+    "@emdash-cms/blocks": "1.0.1",
     "@emdash-cms/plugin-cli": "0.13.1",
     "@emdash-cms/plugin-test": "0.2.6",
     "@propcore/client": "workspace:^",

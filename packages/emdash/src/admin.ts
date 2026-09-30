@@ -16,9 +16,7 @@ async function render(ctx: PluginContext, notice?: string) {
     : state.error
       ? `Last attempt ${state.last_sync_at}: ${state.error}`
       : `Last sync ${state.last_sync_at}: ${state.projects} projects, ${state.units} units.`;
-  const routes = ['projects', 'units?project=<id>', 'availability?project=<id>']
-    .map((r) => `/_emdash/api/plugins/propcore/${r}`)
-    .join('\n');
+  const base = '/_emdash/api/plugins/propcore';
   return {
     blocks: [
       { type: 'header', text: 'Propcore catalog' },
@@ -41,11 +39,18 @@ async function render(ctx: PluginContext, notice?: string) {
       { type: 'section', text: status },
       {
         type: 'actions',
-        elements: [{ type: 'button', action_id: 'sync_now', text: 'Sync now', style: 'primary' }],
+        elements: [{ type: 'button', action_id: 'sync_now', label: 'Sync now', style: 'primary' }],
       },
+      // Section text renders as one plain paragraph (newlines collapse), so the
+      // site and the routes go into a fields block: one label/value pair each.
       {
-        type: 'section',
-        text: `Site: ${siteSlug ? siteUrl(siteSlug) : '-'}\nRoutes your pages can call:\n${routes}`,
+        type: 'fields',
+        fields: [
+          { label: 'Site', value: siteSlug ? siteUrl(siteSlug) : '-' },
+          { label: 'Projects route', value: `${base}/projects` },
+          { label: 'Units route', value: `${base}/units?project=<id>` },
+          { label: 'Availability route', value: `${base}/availability?project=<id>` },
+        ],
       },
     ],
   };

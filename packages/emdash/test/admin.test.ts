@@ -1,6 +1,14 @@
+import { validateBlockResponse } from '@emdash-cms/blocks/server';
 import { createPluginRuntimeTestHost, type PluginRuntimeTestHost } from '@emdash-cms/plugin-test';
 import { afterEach, beforeAll, expect, it } from 'vitest';
 import { json, KEY, SITE } from './fixtures.js';
+
+// The same validator EmDash runs on every sandboxed admin response
+// (emdash-runtime validateSandboxedAdminResponse); an invalid block is a 502 in the admin.
+function expectValidBlocks(out: unknown) {
+  const r = validateBlockResponse(out, { pluginPagePaths: ['/propcore'] });
+  expect(r.errors).toEqual([]);
+}
 
 let host: PluginRuntimeTestHost | undefined;
 beforeAll(() => {
@@ -17,6 +25,7 @@ it('page_load renders the form with has_value=false before a key is saved', asyn
     type: 'page_load',
     page: '/propcore',
   })) as { blocks: unknown[] };
+  expectValidBlocks(out);
   const text = JSON.stringify(out);
   expect(text).toContain('"action_id":"siteSlug"');
   expect(text).toContain('"action_id":"apiKey"');
@@ -30,6 +39,7 @@ it('form_submit saves settings, schedules the hourly sync, and never echoes the 
     action_id: 'save',
     values: { siteSlug: 'demo', apiKey: KEY },
   });
+  expectValidBlocks(out);
   expect(await host.inspect.setting('siteSlug')).toBe('demo');
   // Secret settings are stored as an encrypted envelope, never as the plaintext.
   const stored = await host.inspect.setting('apiKey');
@@ -49,6 +59,7 @@ it('rejects an invalid slug and keeps the old value', async () => {
     action_id: 'save',
     values: { siteSlug: 'Bad Slug!' },
   });
+  expectValidBlocks(out);
   expect(await host.inspect.setting('siteSlug')).toBe('demo');
   expect(JSON.stringify(out)).toMatch(/slug/i);
 });
@@ -63,6 +74,7 @@ it('sync_now runs the sync and shows the counts', async () => {
     type: 'block_action',
     action_id: 'sync_now',
   });
+  expectValidBlocks(out);
   expect(JSON.stringify(out)).toContain('4 units');
   expect(await host.inspect.storage.list('units')).toHaveLength(4);
 });
