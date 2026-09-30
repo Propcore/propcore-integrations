@@ -393,64 +393,218 @@
         "additionalProperties": false
       },
       "PublicUnitDetail": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PublicUnitCard"
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-          {
-            "type": "object",
-            "properties": {
-              "characteristic_sections": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CharacteristicSection"
-                }
+          "unit_number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "project_id": {
+            "anyOf": [
+              {
+                "type": "string"
               },
-              "media": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "propertyNames": {
-                    "type": "string"
-                  },
-                  "additionalProperties": {}
-                }
+              {
+                "type": "null"
               }
-            },
-            "required": ["characteristic_sections", "media"],
-            "additionalProperties": false
+            ]
+          },
+          "building_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "floor_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rooms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price": {
+            "$ref": "#/components/schemas/PublicPrice"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PublicStatusBadge"
+          },
+          "promotion_badges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabelText"
+            }
+          },
+          "cover_url": {
+            "type": "string"
+          },
+          "characteristic_sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSection"
+            }
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {}
+            }
           }
-        ]
+        },
+        "required": [
+          "id",
+          "unit_number",
+          "type",
+          "project_id",
+          "building_id",
+          "floor_number",
+          "rooms",
+          "area",
+          "price",
+          "status",
+          "promotion_badges",
+          "characteristic_sections",
+          "media"
+        ],
+        "additionalProperties": false
       },
       "PublicListingDetail": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PublicListingCard"
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-          {
-            "type": "object",
-            "properties": {
-              "characteristic_sections": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CharacteristicSection"
-                }
+          "type": {
+            "type": "string"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
               },
-              "media": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "propertyNames": {
-                    "type": "string"
-                  },
-                  "additionalProperties": {}
-                }
+              {
+                "type": "null"
               }
-            },
-            "required": ["characteristic_sections", "media"],
-            "additionalProperties": false
+            ]
+          },
+          "project_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "floor_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rooms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "price": {
+            "$ref": "#/components/schemas/PublicPrice"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PublicStatusBadge"
+          },
+          "cover_url": {
+            "type": "string"
+          },
+          "characteristic_sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSection"
+            }
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {}
+            }
           }
-        ]
+        },
+        "required": [
+          "id",
+          "type",
+          "reference",
+          "project_id",
+          "floor_number",
+          "rooms",
+          "area",
+          "price",
+          "status",
+          "characteristic_sections",
+          "media"
+        ],
+        "additionalProperties": false
       },
       "PublicProject": {
         "type": "object",
@@ -549,24 +703,107 @@
         "additionalProperties": false
       },
       "PublicProjectDetail": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PublicProject"
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-          {
-            "type": "object",
-            "properties": {
-              "characteristic_sections": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CharacteristicSection"
-                }
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
               }
-            },
-            "required": ["characteristic_sections"],
-            "additionalProperties": false
+            ]
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "status_label": {
+            "$ref": "#/components/schemas/LabelText"
+          },
+          "status_color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currency": {
+            "type": "string"
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {}
+            }
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unit_summary": {
+            "$ref": "#/components/schemas/UnitSummary"
+          },
+          "price_range": {
+            "$ref": "#/components/schemas/PriceRange"
+          },
+          "price_per_sqm_range": {
+            "$ref": "#/components/schemas/PriceRange"
+          },
+          "area_range": {
+            "$ref": "#/components/schemas/PriceRange"
+          },
+          "active_promotion_count": {
+            "type": "number"
+          },
+          "building_count": {
+            "type": "number"
+          },
+          "characteristic_sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicSection"
+            }
           }
-        ]
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "status_label",
+          "status_color",
+          "currency",
+          "media",
+          "published_at",
+          "unit_summary",
+          "area_range",
+          "active_promotion_count",
+          "building_count",
+          "characteristic_sections"
+        ],
+        "additionalProperties": false
       },
       "PublicStackingBuilding": {
         "type": "object",
@@ -870,6 +1107,56 @@
         "required": ["error", "code"],
         "additionalProperties": false
       },
+      "PublicPrice": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": ["visible", "on_request"]
+          },
+          "currency": {
+            "type": "string"
+          },
+          "current": {
+            "type": "string"
+          },
+          "effective": {
+            "type": "string"
+          },
+          "discount_pct": {
+            "type": "number"
+          },
+          "per_sqm": {
+            "type": "string"
+          }
+        },
+        "required": ["mode", "currency"],
+        "additionalProperties": false
+      },
+      "PublicStatusBadge": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": ["available", "unavailable"]
+          },
+          "core_status": {
+            "type": "string",
+            "enum": ["available", "reserved", "sold"]
+          },
+          "label": {
+            "$ref": "#/components/schemas/LabelText"
+          },
+          "color": {
+            "type": "string"
+          }
+        },
+        "required": ["state", "core_status"],
+        "additionalProperties": false
+      },
+      "LabelText": {
+        "type": "string"
+      },
       "CharacteristicSection": {
         "type": "object",
         "properties": {
@@ -929,9 +1216,6 @@
         },
         "required": ["country"],
         "additionalProperties": false
-      },
-      "LabelText": {
-        "type": "string"
       },
       "UnitSummary": {
         "type": "object",
@@ -1003,53 +1287,6 @@
           }
         },
         "required": ["floor_number", "cells"],
-        "additionalProperties": false
-      },
-      "PublicPrice": {
-        "type": "object",
-        "properties": {
-          "mode": {
-            "type": "string",
-            "enum": ["visible", "on_request"]
-          },
-          "currency": {
-            "type": "string"
-          },
-          "current": {
-            "type": "string"
-          },
-          "effective": {
-            "type": "string"
-          },
-          "discount_pct": {
-            "type": "number"
-          },
-          "per_sqm": {
-            "type": "string"
-          }
-        },
-        "required": ["mode", "currency"],
-        "additionalProperties": false
-      },
-      "PublicStatusBadge": {
-        "type": "object",
-        "properties": {
-          "state": {
-            "type": "string",
-            "enum": ["available", "unavailable"]
-          },
-          "core_status": {
-            "type": "string",
-            "enum": ["available", "reserved", "sold"]
-          },
-          "label": {
-            "$ref": "#/components/schemas/LabelText"
-          },
-          "color": {
-            "type": "string"
-          }
-        },
-        "required": ["state", "core_status"],
         "additionalProperties": false
       },
       "CharacteristicGroup": {

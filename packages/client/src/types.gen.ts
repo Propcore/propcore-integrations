@@ -503,13 +503,36 @@ export interface components {
             };
             items: (components["schemas"]["PublicUnitCard"] | components["schemas"]["PublicListingCard"])[];
         };
-        PublicUnitDetail: components["schemas"]["PublicUnitCard"] & {
+        PublicUnitDetail: {
+            id: string;
+            unit_number: string;
+            type: string;
+            project_id: string | null;
+            building_id: string | null;
+            floor_number: number | null;
+            rooms: number | null;
+            area: string | null;
+            price: components["schemas"]["PublicPrice"];
+            status: components["schemas"]["PublicStatusBadge"];
+            promotion_badges: components["schemas"]["LabelText"][];
+            cover_url?: string;
             characteristic_sections: components["schemas"]["CharacteristicSection"][];
             media: {
                 [key: string]: unknown;
             }[];
         };
-        PublicListingDetail: components["schemas"]["PublicListingCard"] & {
+        PublicListingDetail: {
+            id: string;
+            type: string;
+            reference: string | null;
+            project_id: string | null;
+            floor_number: number | null;
+            rooms: number | null;
+            area: string | null;
+            address?: components["schemas"]["Address"];
+            price: components["schemas"]["PublicPrice"];
+            status: components["schemas"]["PublicStatusBadge"];
+            cover_url?: string;
             characteristic_sections: components["schemas"]["CharacteristicSection"][];
             media: {
                 [key: string]: unknown;
@@ -534,7 +557,24 @@ export interface components {
             active_promotion_count: number;
             building_count: number;
         };
-        PublicProjectDetail: components["schemas"]["PublicProject"] & {
+        PublicProjectDetail: {
+            id: string;
+            name: string;
+            address?: components["schemas"]["Address"] | null;
+            status: string;
+            status_label: components["schemas"]["LabelText"];
+            status_color: string | null;
+            currency: string;
+            media: {
+                [key: string]: unknown;
+            }[];
+            published_at: string | null;
+            unit_summary: components["schemas"]["UnitSummary"];
+            price_range?: components["schemas"]["PriceRange"];
+            price_per_sqm_range?: components["schemas"]["PriceRange"];
+            area_range: components["schemas"]["PriceRange"];
+            active_promotion_count: number;
+            building_count: number;
             characteristic_sections: components["schemas"]["CharacteristicSection"][];
         };
         PublicStackingBuilding: {
@@ -590,6 +630,24 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        PublicPrice: {
+            /** @enum {string} */
+            mode: "visible" | "on_request";
+            currency: string;
+            current?: string;
+            effective?: string;
+            discount_pct?: number;
+            per_sqm?: string;
+        };
+        PublicStatusBadge: {
+            /** @enum {string} */
+            state: "available" | "unavailable";
+            /** @enum {string} */
+            core_status: "available" | "reserved" | "sold";
+            label?: components["schemas"]["LabelText"];
+            color?: string;
+        };
+        LabelText: string;
         CharacteristicSection: {
             /** @enum {string} */
             level: "unit" | "building" | "project";
@@ -607,7 +665,6 @@ export interface components {
             unparsed?: string;
             point?: components["schemas"]["GeoPoint"];
         };
-        LabelText: string;
         UnitSummary: {
             available: number;
             reserved: number;
@@ -622,23 +679,6 @@ export interface components {
         PublicStackingFloor: {
             floor_number: number | null;
             cells: components["schemas"]["PublicStackingCell"][];
-        };
-        PublicPrice: {
-            /** @enum {string} */
-            mode: "visible" | "on_request";
-            currency: string;
-            current?: string;
-            effective?: string;
-            discount_pct?: number;
-            per_sqm?: string;
-        };
-        PublicStatusBadge: {
-            /** @enum {string} */
-            state: "available" | "unavailable";
-            /** @enum {string} */
-            core_status: "available" | "reserved" | "sold";
-            label?: components["schemas"]["LabelText"];
-            color?: string;
         };
         CharacteristicGroup: {
             key: string;

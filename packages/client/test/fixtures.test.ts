@@ -22,33 +22,11 @@ const FIXTURE_ROUTES: Record<string, string> = {
   'view-results': '/ai/views/{view_key}/results',
 };
 
-type Schema = Record<string, unknown>;
-
-function deref(schema: Schema): Schema {
-  const ref = schema.$ref;
-  if (typeof ref !== 'string') return schema;
-  return deref(doc.components.schemas[ref.replace('#/components/schemas/', '')] as Schema);
-}
-
-// The fragment is generated from zod intersections: each allOf member carries
-// additionalProperties:false, which no object can satisfy across members. Read the
-// intersection the way zod does: members lose their own closure, the whole object
-// is closed once with unevaluatedProperties:false.
-function intersect(schema: Schema): Schema {
-  const target = deref(schema);
-  if (!Array.isArray(target.allOf)) return schema;
-  const members = (target.allOf as Schema[]).map((m) => {
-    const { additionalProperties: _closed, ...open } = deref(m);
-    return open;
-  });
-  return { allOf: members, unevaluatedProperties: false };
-}
-
 function responseSchema(path: string): object {
   const op = doc.paths[path]?.get;
   const schema = op?.responses?.['200']?.content?.['application/json']?.schema;
   if (!schema) throw new Error(`no 200 JSON schema for GET ${path}`);
-  return intersect(schema);
+  return schema;
 }
 
 function rewriteRefs(node: unknown): unknown {
