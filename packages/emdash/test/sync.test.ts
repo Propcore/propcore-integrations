@@ -1,10 +1,10 @@
 import { createPluginRuntimeTestHost, type PluginRuntimeTestHost } from '@emdash-cms/plugin-test';
 import { afterEach, beforeAll, expect, it } from 'vitest';
-import { json, KEY, SITE } from './fixtures.js';
+import { ENC_KEY, json, KEY, SITE } from './fixtures.js';
 
 let host: PluginRuntimeTestHost | undefined;
 beforeAll(() => {
-  process.env.EMDASH_ENCRYPTION_KEY ??= 'test-encryption-key-32-bytes-long!!';
+  process.env.EMDASH_ENCRYPTION_KEY ??= ENC_KEY;
 });
 afterEach(async () => {
   await host?.dispose();

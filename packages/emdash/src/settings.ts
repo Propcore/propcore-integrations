@@ -7,7 +7,17 @@ export interface Settings {
 }
 
 // Dots are allowed: a site can live at a deeper name such as astra-demo.demo.propcore.page.
-export const SLUG = /^[a-z0-9.-]{1,80}$/;
+export const SLUG = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*$/;
+
+// Accept a pasted address: drop the scheme, the path and the .propcore.page suffix.
+export function normalizeSlug(raw: string): string {
+  return raw
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\//, '')
+    .replace(/\/.*$/, '')
+    .replace(/\.propcore\.page$/, '');
+}
 
 export function siteUrl(slug: string): string {
   return `https://${slug}.propcore.page`;
@@ -16,7 +26,7 @@ export function siteUrl(slug: string): string {
 export async function readSettings(ctx: PluginContext): Promise<Settings | null> {
   const siteSlug = await ctx.settings.get<string>('siteSlug');
   const apiKey = await ctx.settings.get<string>('apiKey');
-  if (!siteSlug || !apiKey || !SLUG.test(siteSlug)) return null;
+  if (!siteSlug || !apiKey || !SLUG.test(siteSlug) || siteSlug.length > 80) return null;
   return { siteSlug, apiKey };
 }
 

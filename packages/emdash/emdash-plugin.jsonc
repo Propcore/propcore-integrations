@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "publisher": "did:plc:g2dq3sifwffisqt6522ifly2",
   "license": "MIT",
+  "repo": "https://github.com/Propcore/propcore-integrations",
   "author": { "name": "Propcore", "url": "https://propcore.ai" },
   "security": { "email": "security@propcore.ai" },
   "name": "Propcore catalog",

@@ -1,11 +1,11 @@
 import { createPluginRuntimeTestHost, type PluginRuntimeTestHost } from '@emdash-cms/plugin-test';
 import { afterEach, beforeAll, expect, it } from 'vitest';
-import { json, KEY, SITE } from './fixtures.js';
+import { ENC_KEY, json, KEY, SITE } from './fixtures.js';
 
 const ROUTES = 'https://plugin.test/_emdash/api/plugins/propcore';
 let host: PluginRuntimeTestHost | undefined;
 beforeAll(() => {
-  process.env.EMDASH_ENCRYPTION_KEY ??= 'test-encryption-key-32-bytes-long!!';
+  process.env.EMDASH_ENCRYPTION_KEY ??= ENC_KEY;
 });
 afterEach(async () => {
   await host?.dispose();
@@ -120,4 +120,18 @@ it('units pages with a real cursor and rejects a malformed one', async () => {
     url: `${ROUTES}/units?project=big&cursor=not-base64`,
   });
   expect(bad.status).toBe(400);
+  expect(((await bad.json()) as { error: { code: string } }).error.code).toBe('BAD_REQUEST');
+});
+
+it('availability refuses a project that was never synced, without an upstream request', async () => {
+  const h = await synced();
+  for (const id of ['nope', '..']) {
+    const res = await h.actions.routes.request('availability', {
+      method: 'GET',
+      url: `${ROUTES}/availability?project=${id}`,
+    });
+    expect(res.status).toBe(404);
+    expect(((await res.json()) as { error: { code: string } }).error.code).toBe('NOT_FOUND');
+  }
+  expect(h.http.requests()).toHaveLength(0);
 });

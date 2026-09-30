@@ -8,3 +8,4 @@ export const json = (name: string) =>
   new Response(JSON.stringify(files[name]), { headers: { 'content-type': 'application/json' } });
 export const SITE = 'https://demo.propcore.page';
 export const KEY = 'pcs_test_key';
+export const ENC_KEY = `emdash_enc_v1_${'A'.repeat(43)}`;

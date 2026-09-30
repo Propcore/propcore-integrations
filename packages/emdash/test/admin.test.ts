@@ -1,7 +1,7 @@
 import { validateBlockResponse } from '@emdash-cms/blocks/server';
 import { createPluginRuntimeTestHost, type PluginRuntimeTestHost } from '@emdash-cms/plugin-test';
 import { afterEach, beforeAll, expect, it } from 'vitest';
-import { json, KEY, SITE } from './fixtures.js';
+import { ENC_KEY, json, KEY, SITE } from './fixtures.js';
 
 // The same validator EmDash runs on every sandboxed admin response
 // (emdash-runtime validateSandboxedAdminResponse); an invalid block is a 502 in the admin.
@@ -12,7 +12,7 @@ function expectValidBlocks(out: unknown) {
 
 let host: PluginRuntimeTestHost | undefined;
 beforeAll(() => {
-  process.env.EMDASH_ENCRYPTION_KEY ??= 'emdash_enc_v1_' + 'A'.repeat(43);
+  process.env.EMDASH_ENCRYPTION_KEY ??= ENC_KEY;
 });
 afterEach(async () => {
   await host?.dispose();

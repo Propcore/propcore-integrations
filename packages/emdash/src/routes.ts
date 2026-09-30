@@ -24,6 +24,7 @@ const reply = (status: number, body: unknown) =>
 const ok = (data: unknown) => reply(200, { success: true, data });
 const fail = (status: number, code: string, message: string) =>
   reply(status, { success: false, error: { code, message } });
+const notFound = (message: string) => fail(404, 'NOT_FOUND', message);
 const badRequest = (message: string) => fail(400, 'BAD_REQUEST', message);
 const serverError = (message: string) => fail(500, 'SERVER_ERROR', message);
 const badGateway = (message: string) => fail(502, 'UPSTREAM_ERROR', message);
@@ -59,7 +60,11 @@ export const units: RouteEntry = {
       });
       return ok({ items: r.items.map((i) => i.data), cursor: r.cursor ?? null });
     } catch (e) {
-      if (e instanceof Error && e.name === 'InvalidCursorError')
+      // Across the sandbox bridge the error is a plain Error, so match the name or the message.
+      if (
+        e instanceof Error &&
+        /InvalidCursorError|Invalid pagination cursor/.test(`${e.name} ${e.message}`)
+      )
         return badRequest('invalid cursor');
       throw e;
     }
@@ -74,6 +79,10 @@ export const availability: RouteEntry = {
   handler: async (routeCtx, ctx: PluginContext) => {
     const project = str(routeCtx.input as Input, 'project');
     if (!project) return badRequest('project is required');
+    // Only synced projects reach the keyed upstream call: no caller-chosen path segments,
+    // and anonymous traffic cannot use the key's rate limit on ids we do not know.
+    if (!ctx.storage.projects) return serverError('storage unavailable');
+    if (!(await ctx.storage.projects.get(project))) return notFound('unknown project');
     const settings = await readSettings(ctx);
     if (!settings) return badRequest('Propcore settings are missing');
     try {
