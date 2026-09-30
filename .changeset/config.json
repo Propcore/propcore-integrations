@@ -5,5 +5,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["astro-starter"]
+  "ignore": ["astro-starter", "@propcore/emdash-plugin"]
 }

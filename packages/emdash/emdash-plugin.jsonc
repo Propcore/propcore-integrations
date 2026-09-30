@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/@emdash-cms/plugin-cli/schemas/emdash-plugin.schema.json",
+  "slug": "propcore",
+  "version": "0.1.0",
+  "publisher": "did:plc:g2dq3sifwffisqt6522ifly2",
+  "license": "MIT",
+  "author": { "name": "Propcore", "url": "https://propcore.ai" },
+  "security": { "email": "security@propcore.ai" },
+  "name": "Propcore catalog",
+  "description": "Projects, units and live availability from your Propcore workspace, for your EmDash site.",
+  "keywords": ["real-estate", "property", "catalog", "propcore"],
+  "capabilities": ["network:request"],
+  "allowedHosts": ["*.propcore.page"],
+  "storage": {
+    "projects": { "indexes": ["updated_at"] },
+    "units": { "indexes": ["project_id", ["project_id", "unit_number"], "updated_at"] }
+  },
+  "admin": {
+    "pages": [{ "path": "/propcore", "label": "Propcore", "icon": "settings" }],
+    "settingsSchema": {
+      "siteSlug": {
+        "type": "string",
+        "label": "Propcore site slug",
+        "description": "The slug of your AI Source storefront: <slug>.propcore.page"
+      },
+      "apiKey": {
+        "type": "secret",
+        "label": "Source key",
+        "description": "From Propcore Admin → Storefronts → the AI Source → Source key"
+      }
+    }
+  }
+}
