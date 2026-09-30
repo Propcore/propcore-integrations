@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import type { PublicUnitCard } from '@propcore/client';
+import Price from '../../components/Price.astro';
+import StatusPill from '../../components/StatusPill.astro';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const units = await getCollection('units');
+  return units.map((u) => ({ params: { id: u.id }, props: { unit: u.data as PublicUnitCard } }));
+}
+const { unit } = Astro.props as { unit: PublicUnitCard };
+---
+<Base title={`Unit ${unit.unit_number}`}>
+  <p class="muted"><a href={`/projects/${unit.project_id}`}>← Project</a></p>
+  <h1>Unit {unit.unit_number} <StatusPill status={unit.status} /></h1>
+  {unit.cover_url && <img src={unit.cover_url} alt={`Unit ${unit.unit_number}`} style="max-width:640px;border-radius:12px" />}
+  <p>{unit.type} · {unit.rooms ?? '–'} rooms · {unit.area ?? '–'} m² · floor {unit.floor_number ?? '–'}</p>
+  <p><Price price={unit.price} /></p>
+  {unit.promotion_badges.length > 0 && <p>{unit.promotion_badges.map((b) => <span class="pill" style="background:var(--warn)">{b}</span>)}</p>}
+</Base>

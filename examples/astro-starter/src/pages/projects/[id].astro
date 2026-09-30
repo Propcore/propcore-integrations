@@ -1,0 +1,41 @@
+---
+export const prerender = false;
+
+import { getEntry, getLiveCollection } from 'astro:content';
+import { propcoreStacking } from '@propcore/astro';
+import type { PublicProject } from '@propcore/client';
+import Availability from '../../components/Availability.astro';
+import UnitCard from '../../components/UnitCard.astro';
+import Base from '../../layouts/Base.astro';
+
+const id = Astro.params.id;
+const entry = id ? await getEntry('projects', id) : undefined;
+if (!id || !entry) return new Response(null, { status: 404 });
+const project = entry.data as PublicProject;
+const propcore = { site: import.meta.env.PROPCORE_SITE, key: import.meta.env.PROPCORE_KEY };
+const [{ entries: units = [] }, buildings] = await Promise.all([
+  getLiveCollection('availability', { project_id: id }),
+  propcoreStacking(propcore, id),
+]);
+const rooms = Astro.url.searchParams.get('rooms');
+const shown = rooms ? units.filter((u) => String(u.data.rooms) === rooms) : units;
+const roomOptions = [...new Set(units.map((u) => u.data.rooms).filter((r) => r != null))].sort();
+---
+<Base title={project.name}>
+  <h1>{project.name}</h1>
+  <p class="muted">{project.status_label} · {project.unit_summary.available} of {project.unit_summary.total} available</p>
+
+  <h2>Availability</h2>
+  <Availability buildings={buildings} />
+
+  <h2>Units</h2>
+  <form class="filters" method="get">
+    <label>Rooms
+      <select name="rooms" onchange="this.form.submit()">
+        <option value="">All</option>
+        {roomOptions.map((r) => <option value={String(r)} selected={String(r) === rooms}>{r}</option>)}
+      </select>
+    </label>
+  </form>
+  <div class="grid">{shown.map((u) => <UnitCard unit={u.data} />)}</div>
+</Base>

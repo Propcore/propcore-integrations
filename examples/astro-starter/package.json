@@ -1,0 +1,22 @@
+{
+  "name": "astro-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
+    "preview": "astro preview",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.3.0",
+    "@propcore/astro": "workspace:^",
+    "@propcore/client": "workspace:^",
+    "astro": "^7.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.0",
+    "typescript": "^5.9.0"
+  }
+}

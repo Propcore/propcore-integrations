@@ -1,0 +1,18 @@
+---
+import type { PublicPrice } from '@propcore/client';
+
+const { price } = Astro.props as { price: PublicPrice };
+const fmt = (v: string) =>
+  new Intl.NumberFormat('en', {
+    style: 'currency',
+    currency: price.currency,
+    maximumFractionDigits: 0,
+  }).format(Number(v));
+---
+{price.mode === 'on_request' || !price.effective ? (
+  <span class="muted">Price on request</span>
+) : price.current && price.current !== price.effective ? (
+  <span><s class="muted">{fmt(price.current)}</s> <strong>{fmt(price.effective)}</strong></span>
+) : (
+  <strong>{fmt(price.effective)}</strong>
+)}

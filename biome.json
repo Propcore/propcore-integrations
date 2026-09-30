@@ -3,5 +3,15 @@
   "files": { "includes": ["**", "!**/dist", "!**/node_modules", "!**/*.gen.ts", "!**/.astro"] },
   "formatter": { "indentStyle": "space", "indentWidth": 2, "lineWidth": 100 },
   "linter": { "enabled": true, "rules": { "recommended": true } },
-  "javascript": { "formatter": { "quoteStyle": "single" } }
+  "javascript": { "formatter": { "quoteStyle": "single" } },
+  "overrides": [
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": { "noUnusedVariables": "off", "noUnusedImports": "off" }
+        }
+      }
+    }
+  ]
 }

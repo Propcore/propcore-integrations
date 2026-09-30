@@ -1,0 +1,28 @@
+---
+import type { PublicStackingBuilding } from '@propcore/client';
+
+const { buildings } = Astro.props as { buildings: PublicStackingBuilding[] };
+---
+{buildings.map((b) => (
+  <section>
+    <h3>{b.building_name}</h3>
+    <div class="stack">
+      {b.floors.map((f) => (
+        <div class="floor">
+          <span class="muted">{f.floor_number ?? '–'}</span>
+          <div class="cells">
+            {f.cells.map((c) => (
+              c.unit_id ? (
+                <a class={`cell ${c.status.state}`} href={`/units/${c.unit_id}`} style={`background:${c.status.color ?? 'var(--off)'}`} title={c.status.label ?? c.status.core_status}>
+                  {c.unit_number}
+                </a>
+              ) : (
+                <span class="cell unavailable" style="background:var(--line)"></span>
+              )
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+))}

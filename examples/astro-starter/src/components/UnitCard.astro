@@ -1,0 +1,13 @@
+---
+import type { PublicUnitCard } from '@propcore/client';
+import Price from './Price.astro';
+import StatusPill from './StatusPill.astro';
+
+const { unit } = Astro.props as { unit: PublicUnitCard };
+---
+<a class="card" href={`/units/${unit.id}`}>
+  {unit.cover_url && <img src={unit.cover_url} alt={`Unit ${unit.unit_number}`} loading="lazy" />}
+  <div><strong>Unit {unit.unit_number}</strong> <StatusPill status={unit.status} /></div>
+  <div class="muted">{unit.rooms ?? '–'} rooms · {unit.area ?? '–'} m² · floor {unit.floor_number ?? '–'}</div>
+  <Price price={unit.price} />
+</a>

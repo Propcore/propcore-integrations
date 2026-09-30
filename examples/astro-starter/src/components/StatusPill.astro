@@ -1,0 +1,7 @@
+---
+import type { PublicStatusBadge } from '@propcore/client';
+
+const { status } = Astro.props as { status: PublicStatusBadge };
+const color = status.color ?? (status.state === 'available' ? 'var(--ok)' : 'var(--off)');
+---
+<span class="pill" style={`background:${color}`}>{status.label ?? status.core_status}</span>
