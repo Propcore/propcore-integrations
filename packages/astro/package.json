@@ -1,0 +1,53 @@
+{
+  "name": "@propcore/astro",
+  "version": "0.1.0",
+  "description": "Astro content-layer loaders for a Propcore real estate catalog: projects, units, live availability",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Propcore/propcore-integrations",
+    "directory": "packages/astro"
+  },
+  "homepage": "https://propcore.ai",
+  "keywords": [
+    "withastro",
+    "astro-loader",
+    "astro",
+    "propcore",
+    "real-estate",
+    "property",
+    "catalog"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@propcore/client": "workspace:^"
+  },
+  "peerDependencies": {
+    "astro": ">=7.0.0"
+  },
+  "devDependencies": {
+    "astro": "^7.3.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}
