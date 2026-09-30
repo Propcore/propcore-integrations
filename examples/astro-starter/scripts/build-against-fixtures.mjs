@@ -19,7 +19,8 @@ const walk = (d) =>
     const p = join(d, n);
     return statSync(p).isDirectory() ? walk(p) : [p];
   });
-for (const file of walk(distDir)) {
+// The adapter copies .env to dist/server/.dev.vars for local `wrangler dev`; `wrangler deploy` never uploads it.
+for (const file of walk(distDir).filter((f) => !f.endsWith('/.dev.vars'))) {
   if (readFileSync(file).includes('pcs_fixture'))
     throw new Error(`the source key leaked into ${file}`);
 }

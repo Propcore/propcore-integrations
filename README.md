@@ -17,8 +17,9 @@ The key is a secret: use it only on the server (build step, SSR, CI), never in b
 
 ## Development
 
-    pnpm install
-    pnpm typecheck && pnpm test && pnpm build
+    pnpm install && pnpm build && pnpm typecheck && pnpm test
+
+Build comes before typecheck because the packages resolve each other through `dist/`, which does not exist in a fresh clone.
 
 Releases use [Changesets](https://github.com/changesets/changesets): `pnpm changeset`, merge,
 `pnpm release`.

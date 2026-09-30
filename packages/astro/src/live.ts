@@ -9,6 +9,7 @@ import type { LiveLoader } from 'astro/loaders';
 import { type PropcoreOptions, resolveClient } from './options.js';
 
 export class PropcoreLiveError extends Error {
+  /** HTTP status of the failed call; `0` means no HTTP status (network failure, misconfiguration). */
   readonly status: number;
   constructor(message: string, status: number) {
     super(message);

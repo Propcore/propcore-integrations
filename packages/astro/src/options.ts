@@ -1,4 +1,5 @@
 import { createClient, type PropcoreClient } from '@propcore/client';
+import { VERSION } from './version.js';
 
 export interface PropcoreOptions {
   /** The AI Source site address from Propcore Admin, e.g. https://skyline.propcore.page */
@@ -21,6 +22,6 @@ export function resolveClient(o: PropcoreOptions): PropcoreClient {
     site: o.site,
     key: o.key,
     ...(o.fetch ? { fetch: o.fetch } : {}),
-    userAgent: '@propcore/astro',
+    userAgent: `@propcore/astro/${VERSION}`,
   });
 }

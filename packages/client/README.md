@@ -21,6 +21,8 @@ const stacking = await pc.projects.stacking(projects[0].id);   // floors × unit
 Where the address and key come from: Propcore Admin → Storefronts → New → **AI Source**. The
 detail drawer shows the site address and the source key; **Rotate** issues a new key.
 
+The client calls `https://<site>/ai/…`; that path is a stable contract for this major version.
+
 Errors: `PropcoreAuthError` (401, key missing or revoked), `PropcoreNotFoundError` (404),
 `PropcoreRateLimitError` (429, `retryAfter` seconds), `PropcoreError` (anything else).
 Field names are exactly what the API returns (snake_case).

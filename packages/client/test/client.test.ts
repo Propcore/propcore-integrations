@@ -87,6 +87,14 @@ describe('createClient', () => {
     const pr = createClient({ site: 'https://s.example', key: 'k', fetch: r.fetch }).units.list();
     await expect(pr).rejects.toBeInstanceOf(PropcoreRateLimitError);
     await expect(pr).rejects.toMatchObject({ retryAfter: 17 });
+    const d = fakeFetch(
+      429,
+      { message: 'Rate limit exceeded' },
+      { 'retry-after': 'Wed, 21 Oct 2026 07:28:00 GMT' },
+    );
+    const pd = createClient({ site: 'https://s.example', key: 'k', fetch: d.fetch }).units.list();
+    await expect(pd).rejects.toBeInstanceOf(PropcoreRateLimitError);
+    await expect(pd).rejects.toMatchObject({ retryAfter: undefined });
   });
 
   it('rejects a site that is not an http(s) origin', () => {

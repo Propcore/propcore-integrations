@@ -4,3 +4,7 @@ dist
 .env
 *.tsbuildinfo
 .wrangler
+.dev.vars
+.dev.vars.*
+.env.*
+!.env.example

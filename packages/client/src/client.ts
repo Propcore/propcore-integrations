@@ -77,7 +77,12 @@ export function createClient(options: ClientOptions): PropcoreClient {
     if (res.status === 404) throw new PropcoreNotFoundError(message, code);
     if (res.status === 429) {
       const ra = res.headers.get('retry-after');
-      throw new PropcoreRateLimitError(message, ra ? Number(ra) : undefined, code);
+      const seconds = ra ? Number(ra) : Number.NaN;
+      throw new PropcoreRateLimitError(
+        message,
+        Number.isFinite(seconds) ? seconds : undefined,
+        code,
+      );
     }
     throw new PropcoreError(message, res.status, code);
   }
