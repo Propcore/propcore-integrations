@@ -21,7 +21,11 @@ if (liveProject.error?.name === 'LiveEntryNotFoundError')
 const project = liveProject.entry;
 const units = liveUnits.entries;
 if (!project || !units || !buildings) return new Response('Catalog unavailable', { status: 502 });
-const available = units.filter((u) => u.data.status.state === 'available').length;
+// Counts come from the stacking plan: it lists every unit of the project, while `units`
+// holds only what the source's Views expose.
+const cells = buildings.flatMap((b) => b.floors.flatMap((f) => f.cells)).filter((c) => c.unit_id);
+const total = cells.length;
+const available = cells.filter((c) => c.status.state === 'available').length;
 const rooms = Astro.url.searchParams.get('rooms');
 const shown = rooms ? units.filter((u) => String(u.data.rooms) === rooms) : units;
 const roomOptions = [
@@ -30,7 +34,7 @@ const roomOptions = [
 ---
 <Base title={project.data.name}>
   <h1>{project.data.name}</h1>
-  <p class="muted">{project.data.status_label} · {available} of {units.length} available</p>
+  <p class="muted">{project.data.status_label} · {available} of {total} available</p>
 
   <h2>Availability</h2>
   <Availability buildings={buildings} />

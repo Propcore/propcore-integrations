@@ -3,6 +3,8 @@
 A small real estate site: projects, a unit grid with a rooms filter, unit pages, and a live
 availability grid per project. Clone it, set two variables, deploy.
 
+Live demo: https://propcore-astro-demo.xdm-inside.workers.dev — built from this starter against a Propcore demo workspace.
+
     cp .env.example .env     # PROPCORE_SITE + PROPCORE_KEY from Propcore Admin → Storefronts → AI Source
     pnpm install
     pnpm dev
@@ -35,6 +37,8 @@ names the Worker; the build writes `dist/server/wrangler.json` (entry `dist/serv
 
     pnpm build
     wrangler deploy
+
+The adapter declares a `SESSION` KV binding; create your own namespace (`wrangler kv namespace create SESSION`) and put its id in `wrangler.jsonc` — the committed id is the Propcore demo's.
 
 Swap the adapter for Node, Vercel or Netlify if you prefer. The adapter prerenders in Node
 (`prerenderEnvironment: 'node'`) so the build reads the variables from the build environment.

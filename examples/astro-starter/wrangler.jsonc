@@ -5,5 +5,6 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "binding": "ASSETS"
-  }
+  },
+  "kv_namespaces": [{ "binding": "SESSION", "id": "acaa532a9bd9457ea555985995d9941d" }]
 }

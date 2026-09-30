@@ -9,6 +9,8 @@ availability — into a website built with an external tool.
 | [`@propcore/astro`](packages/astro) | Astro content-layer loaders (build-time and live) |
 | [`examples/astro-starter`](examples/astro-starter) | A small real estate site to clone |
 
+Live demo: https://propcore-astro-demo.xdm-inside.workers.dev — built from the starter against a Propcore demo workspace.
+
 ## How it works
 
 In Propcore Admin the operator creates an **AI Source** storefront: picks the Views to expose and
