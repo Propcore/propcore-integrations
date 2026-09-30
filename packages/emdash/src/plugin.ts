@@ -1,4 +1,5 @@
 import type { SandboxedPlugin } from 'emdash/plugin';
+import { availability, projects, units } from './routes.js';
 import { runSync, SYNC_TASK } from './sync.js';
 
 const plugin: SandboxedPlugin = {
@@ -8,6 +9,9 @@ const plugin: SandboxedPlugin = {
     },
   },
   routes: {
+    projects,
+    units,
+    availability,
     admin: { handler: async () => ({ blocks: [{ type: 'section', text: 'Propcore' }] }) },
   },
 };
