@@ -1,29 +1,36 @@
 ---
 export const prerender = false;
 
-import { getEntry, getLiveCollection } from 'astro:content';
+import { getLiveCollection, getLiveEntry } from 'astro:content';
+import { PROPCORE_KEY, PROPCORE_SITE } from 'astro:env/server';
 import { propcoreStacking } from '@propcore/astro';
-import type { PublicProject } from '@propcore/client';
 import Availability from '../../components/Availability.astro';
 import UnitCard from '../../components/UnitCard.astro';
 import Base from '../../layouts/Base.astro';
 
 const id = Astro.params.id;
-const entry = id ? await getEntry('projects', id) : undefined;
-if (!id || !entry) return new Response(null, { status: 404 });
-const project = entry.data as PublicProject;
-const propcore = { site: import.meta.env.PROPCORE_SITE, key: import.meta.env.PROPCORE_KEY };
-const [{ entries: units = [] }, buildings] = await Promise.all([
+if (!id) return new Response(null, { status: 404 });
+const [liveProject, liveUnits, buildings] = await Promise.all([
+  getLiveEntry('liveProjects', id),
   getLiveCollection('availability', { project_id: id }),
-  propcoreStacking(propcore, id),
+  propcoreStacking({ site: PROPCORE_SITE, key: PROPCORE_KEY }, id).catch(() => null),
 ]);
+// Astro reports a loader's `undefined` (our 404) as LiveEntryNotFoundError; its own `.is()` checks the name.
+if (liveProject.error?.name === 'LiveEntryNotFoundError')
+  return new Response(null, { status: 404 });
+const project = liveProject.entry;
+const units = liveUnits.entries;
+if (!project || !units || !buildings) return new Response('Catalog unavailable', { status: 502 });
+const available = units.filter((u) => u.data.status.state === 'available').length;
 const rooms = Astro.url.searchParams.get('rooms');
 const shown = rooms ? units.filter((u) => String(u.data.rooms) === rooms) : units;
-const roomOptions = [...new Set(units.map((u) => u.data.rooms).filter((r) => r != null))].sort();
+const roomOptions = [
+  ...new Set(units.map((u) => u.data.rooms).filter((r): r is number => r != null)),
+].sort((a, b) => a - b);
 ---
-<Base title={project.name}>
-  <h1>{project.name}</h1>
-  <p class="muted">{project.status_label} · {project.unit_summary.available} of {project.unit_summary.total} available</p>
+<Base title={project.data.name}>
+  <h1>{project.data.name}</h1>
+  <p class="muted">{project.data.status_label} · {available} of {units.length} available</p>
 
   <h2>Availability</h2>
   <Availability buildings={buildings} />

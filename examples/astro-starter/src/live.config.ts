@@ -1,11 +1,10 @@
 import { defineLiveCollection } from 'astro:content';
-import { propcoreLiveUnits } from '@propcore/astro';
+import { PROPCORE_KEY, PROPCORE_SITE } from 'astro:env/server';
+import { propcoreLiveProjects, propcoreLiveUnits } from '@propcore/astro';
+
+const propcore = { site: PROPCORE_SITE, key: PROPCORE_KEY };
 
 export const collections = {
-  availability: defineLiveCollection({
-    loader: propcoreLiveUnits({
-      site: import.meta.env.PROPCORE_SITE,
-      key: import.meta.env.PROPCORE_KEY,
-    }),
-  }),
+  availability: defineLiveCollection({ loader: propcoreLiveUnits(propcore) }),
+  liveProjects: defineLiveCollection({ loader: propcoreLiveProjects(propcore) }),
 };

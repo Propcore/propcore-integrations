@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const { unit } = Astro.props as { unit: PublicUnitCard };
 ---
 <Base title={`Unit ${unit.unit_number}`}>
-  <p class="muted"><a href={`/projects/${unit.project_id}`}>← Project</a></p>
+  {unit.project_id && <p class="muted"><a href={`/projects/${unit.project_id}`}>← Project</a></p>}
   <h1>Unit {unit.unit_number} <StatusPill status={unit.status} /></h1>
   {unit.cover_url && <img src={unit.cover_url} alt={`Unit ${unit.unit_number}`} style="max-width:640px;border-radius:12px" />}
   <p>{unit.type} · {unit.rooms ?? '–'} rooms · {unit.area ?? '–'} m² · floor {unit.floor_number ?? '–'}</p>

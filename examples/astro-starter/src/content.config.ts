@@ -1,7 +1,8 @@
 import { defineCollection } from 'astro:content';
+import { PROPCORE_KEY, PROPCORE_SITE } from 'astro:env/server';
 import { propcoreProjects, propcoreUnits } from '@propcore/astro';
 
-const propcore = { site: import.meta.env.PROPCORE_SITE, key: import.meta.env.PROPCORE_KEY };
+const propcore = { site: PROPCORE_SITE, key: PROPCORE_KEY };
 
 export const collections = {
   projects: defineCollection({ loader: propcoreProjects(propcore) }),

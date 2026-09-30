@@ -7,6 +7,24 @@ availability grid per project. Clone it, set two variables, deploy.
     pnpm install
     pnpm dev
 
-Pages under `/units/…` and `/` are built statically; `/projects/[id]` is server-rendered so the
-availability grid is live. Deploys to Cloudflare Pages as is (`@astrojs/cloudflare`); swap the
-adapter for Node, Vercel or Netlify if you prefer.
+## Environment variables
+
+`PROPCORE_SITE` and `PROPCORE_KEY` are server-only secrets, declared in `astro.config.mjs`
+(`env.schema`) and read through `astro:env/server`. They are never sent to the browser and
+never written into the built files.
+
+Both variables must be present in the **build** environment, not only at runtime: `/` and
+`/units/*` are built statically, so the build fetches the catalog from the API. Locally they
+come from `.env`; on Cloudflare Pages set them as build-time variables/secrets **and** as
+runtime secrets (the live page reads them on every request).
+
+## What is static and what is live
+
+- `/` and `/units/*` are built once. They change when you rebuild (for example from a deploy
+  hook or a schedule).
+- `/projects/[id]` is server-rendered on every request: the project header, the unit list and
+  the availability grid are live.
+
+Deploys to Cloudflare Pages as is (`@astrojs/cloudflare`); swap the adapter for Node, Vercel or
+Netlify if you prefer. The adapter prerenders in Node (`prerenderEnvironment: 'node'`) so the
+build reads the variables from the build environment.
