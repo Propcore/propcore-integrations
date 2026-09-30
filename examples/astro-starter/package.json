@@ -7,7 +7,8 @@
     "build": "astro build",
     "check": "astro check",
     "preview": "astro preview",
-    "typecheck": "astro check"
+    "typecheck": "node scripts/with-fixtures.mjs pnpm exec astro check",
+    "test": "node scripts/with-fixtures.mjs node scripts/build-against-fixtures.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.3.0",
