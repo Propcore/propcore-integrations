@@ -17,7 +17,7 @@ const { buildings } = Astro.props as { buildings: PublicStackingBuilding[] };
                   {c.unit_number}
                 </a>
               ) : (
-                <span class="cell unavailable" style="background:var(--line)"></span>
+                <span class={`cell ${c.status.state}`} style={`background:${c.status.color ?? 'var(--off)'}`} title={c.status.label ?? c.status.core_status}>{c.unit_number ?? c.line_key ?? ''}</span>
               )
             ))}
           </div>

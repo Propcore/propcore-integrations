@@ -23,7 +23,7 @@ const units = liveUnits.entries;
 if (!project || !units || !buildings) return new Response('Catalog unavailable', { status: 502 });
 // Counts come from the stacking plan: it lists every unit of the project, while `units`
 // holds only what the source's Views expose.
-const cells = buildings.flatMap((b) => b.floors.flatMap((f) => f.cells)).filter((c) => c.unit_id);
+const cells = buildings.flatMap((b) => b.floors.flatMap((f) => f.cells));
 const total = cells.length;
 const available = cells.filter((c) => c.status.state === 'available').length;
 const rooms = Astro.url.searchParams.get('rooms');
