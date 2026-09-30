@@ -1,4 +1,10 @@
+**Is the key exposed?** No. It is stored encrypted, sent only to your Propcore site, and never returned by a route.
 
+**A unit disappeared from Propcore but is still on my site.** The hourly sync adds and updates units. Units removed in Propcore are not deleted from the site's cache yet; this is planned.
+
+**Which Propcore plan?** Any workspace with storefronts.
+
+**Does "Sync now" differ from the hourly sync?** No, it runs the same sync immediately.
 
 ## Troubleshooting
 
@@ -9,7 +15,5 @@
 **A local `pnpm add file:` install is out of date.** `file:` copies the plugin instead of linking it. Add it again after each build.
 
 **Status shows `401 ...`.** The source key was rotated or revoked. Paste the new key and Save.
-
-**The hourly sync never runs on Cloudflare.** The site needs a `triggers.crons` entry and the `scheduled` handler (see EmDash's Cloudflare deployment guide).
 
 **Which slug do I enter?** The part before `.propcore.page`, for example `astra-demo.demo`. A pasted address is shortened for you.
