@@ -9,6 +9,11 @@
   "name": "Propcore catalog",
   "description": "Projects, units and live availability from your Propcore workspace, for your EmDash site.",
   "keywords": ["real-estate", "property", "catalog", "propcore"],
+  "sections": {
+    "description": { "file": "docs/description.md" },
+    "installation": { "file": "docs/installation.md" },
+    "faq": { "file": "docs/faq.md" }
+  },
   "capabilities": ["network:request"],
   "allowedHosts": ["*.propcore.page"],
   "storage": {

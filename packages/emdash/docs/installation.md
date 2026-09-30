@@ -1,0 +1,3 @@
+1. In Propcore Admin, go to Storefronts, then New, then **AI Source**. Pick the Views to expose, create it, and copy the site slug and the source key from the drawer. The slug is the part before `.propcore.page`. A site under a workspace subdomain has a dotted slug, for example `astra-demo.demo` for `astra-demo.demo.propcore.page`.
+2. In EmDash admin, go to Plugins, then Registry. Install **Propcore catalog** and approve the capability (network access to `*.propcore.page`).
+3. Open **Propcore** in the admin sidebar, enter the slug and the key, Save, then **Sync now**. The plugin syncs every hour after that.

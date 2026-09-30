@@ -7,6 +7,7 @@ availability — into a website built with an external tool.
 |---|---|
 | [`@propcore/client`](packages/client) | Typed `fetch` client for the headless API (`https://<site>/ai/…`) |
 | [`@propcore/astro`](packages/astro) | Astro content-layer loaders (build-time and live) |
+| [`packages/emdash`](packages/emdash) | EmDash CMS plugin (registry: `propcore` by propcore.bsky.social) |
 | [`examples/astro-starter`](examples/astro-starter) | A small real estate site to clone |
 
 Live demo: https://propcore-astro-demo.xdm-inside.workers.dev — built from the starter against a Propcore demo workspace.
