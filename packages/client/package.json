@@ -39,6 +39,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@types/node": "^22.20.4",
     "ajv": "^8.17.0",
     "ajv-formats": "^3.0.0",
     "openapi-typescript": "^7.9.0",

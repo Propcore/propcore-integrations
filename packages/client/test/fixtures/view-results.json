@@ -1,0 +1,105 @@
+{
+  "view": {
+    "key": "all-units",
+    "name": "All units",
+    "entity": "unit"
+  },
+  "items": [
+    {
+      "id": "u-1201",
+      "unit_number": "1201",
+      "type": "apartment",
+      "project_id": "p-skyline",
+      "building_id": "b-a",
+      "floor_number": 12,
+      "rooms": 2,
+      "area": "84.50",
+      "price": {
+        "mode": "visible",
+        "currency": "EUR",
+        "current": "250000.00",
+        "effective": "237500.00",
+        "discount_pct": 5,
+        "per_sqm": "2958.58"
+      },
+      "status": {
+        "state": "available",
+        "core_status": "available",
+        "label": "Available",
+        "color": "#2e7d32"
+      },
+      "promotion_badges": ["Summer -5%"],
+      "cover_url": "https://cdn.example/skyline/1201.jpg"
+    },
+    {
+      "id": "u-1202",
+      "unit_number": "1202",
+      "type": "apartment",
+      "project_id": "p-skyline",
+      "building_id": "b-a",
+      "floor_number": 12,
+      "rooms": 3,
+      "area": "120.00",
+      "price": {
+        "mode": "visible",
+        "currency": "EUR",
+        "current": "410000.00",
+        "effective": "389500.00",
+        "discount_pct": 5,
+        "per_sqm": "3416.67"
+      },
+      "status": {
+        "state": "unavailable",
+        "core_status": "reserved",
+        "label": "Reserved",
+        "color": "#b26a00"
+      },
+      "promotion_badges": ["Summer -5%"]
+    },
+    {
+      "id": "u-1301",
+      "unit_number": "1301",
+      "type": "apartment",
+      "project_id": "p-skyline",
+      "building_id": "b-a",
+      "floor_number": 13,
+      "rooms": 2,
+      "area": "86.00",
+      "price": {
+        "mode": "visible",
+        "currency": "EUR",
+        "current": "265000.00",
+        "effective": "265000.00",
+        "per_sqm": "3081.40"
+      },
+      "status": {
+        "state": "available",
+        "core_status": "available",
+        "label": "Available",
+        "color": "#2e7d32"
+      },
+      "promotion_badges": []
+    },
+    {
+      "id": "u-1302",
+      "unit_number": "1302",
+      "type": "penthouse",
+      "project_id": "p-skyline",
+      "building_id": "b-a",
+      "floor_number": 13,
+      "rooms": 4,
+      "area": "150.00",
+      "price": {
+        "mode": "on_request",
+        "currency": "EUR"
+      },
+      "status": {
+        "state": "unavailable",
+        "core_status": "sold",
+        "label": "Sold",
+        "color": "#6b6b6b"
+      },
+      "promotion_badges": []
+    }
+  ]
+}

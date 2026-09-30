@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "name": "Skyline Tower",
+  "prompt": "A calm, factual site for a 14-floor residential tower in Limassol. Lead with availability and price.",
+  "audience": "Buyers and brokers in Cyprus",
+  "languages": ["en"],
+  "base_url": "https://skyline.propcore.page/ai",
+  "views": [
+    {
+      "key": "all-units",
+      "name": "All units",
+      "entity": "unit",
+      "results_url": "https://skyline.propcore.page/ai/views/all-units/results"
+    }
+  ]
+}

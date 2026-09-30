@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "p-skyline",
+      "name": "Skyline Tower",
+      "address": {
+        "country": "CY",
+        "admin1": {
+          "key": "limassol",
+          "label": "Limassol"
+        },
+        "street": "Amathountos Avenue",
+        "house_number": "120"
+      },
+      "status": "under_construction",
+      "status_label": "Under construction",
+      "status_color": "#c15f3c",
+      "currency": "EUR",
+      "media": [
+        {
+          "url": "https://cdn.example/skyline/cover.jpg",
+          "is_cover": true
+        }
+      ],
+      "published_at": "2026-06-01T09:00:00.000Z",
+      "unit_summary": {
+        "available": 2,
+        "reserved": 1,
+        "sold": 1,
+        "blocked": 0,
+        "total": 4
+      },
+      "price_range": {
+        "min": "250000.00",
+        "max": "615000.00"
+      },
+      "price_per_sqm_range": {
+        "min": "2950.00",
+        "max": "4100.00"
+      },
+      "area_range": {
+        "min": "84.50",
+        "max": "150.00"
+      },
+      "active_promotion_count": 1,
+      "building_count": 1
+    }
+  ]
+}

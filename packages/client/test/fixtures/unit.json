@@ -1,0 +1,33 @@
+{
+  "id": "u-1201",
+  "unit_number": "1201",
+  "type": "apartment",
+  "project_id": "p-skyline",
+  "building_id": "b-a",
+  "floor_number": 12,
+  "rooms": 2,
+  "area": "84.50",
+  "price": {
+    "mode": "visible",
+    "currency": "EUR",
+    "current": "250000.00",
+    "effective": "237500.00",
+    "discount_pct": 5,
+    "per_sqm": "2958.58"
+  },
+  "status": {
+    "state": "available",
+    "core_status": "available",
+    "label": "Available",
+    "color": "#2e7d32"
+  },
+  "promotion_badges": ["Summer -5%"],
+  "cover_url": "https://cdn.example/skyline/1201.jpg",
+  "characteristic_sections": [],
+  "media": [
+    {
+      "url": "https://cdn.example/skyline/1201.jpg",
+      "is_cover": true
+    }
+  ]
+}

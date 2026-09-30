@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "id": "pr-summer",
+      "name": "Summer -5%",
+      "description": "5% off selected 12th-floor units until 30 September",
+      "discount": {
+        "kind": "percent",
+        "value": "5",
+        "currency": null
+      },
+      "starts_at": "2026-06-01",
+      "ends_at": "2026-09-30",
+      "affected_unit_count": 2
+    }
+  ]
+}

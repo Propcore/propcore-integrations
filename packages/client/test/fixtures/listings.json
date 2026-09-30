@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "id": "l-marina-2b",
+      "type": "apartment",
+      "reference": "SKY-R-014",
+      "project_id": "p-skyline",
+      "floor_number": 5,
+      "rooms": 2,
+      "area": "78.00",
+      "address": {
+        "country": "CY",
+        "admin1": {
+          "key": "limassol",
+          "label": "Limassol"
+        },
+        "street": "Amathountos Avenue",
+        "house_number": "120"
+      },
+      "price": {
+        "mode": "visible",
+        "currency": "EUR",
+        "current": "230000.00",
+        "effective": "230000.00",
+        "per_sqm": "2948.72"
+      },
+      "status": {
+        "state": "available",
+        "core_status": "available",
+        "label": "Available",
+        "color": "#2e7d32"
+      },
+      "cover_url": "https://cdn.example/skyline/resale-014.jpg"
+    }
+  ]
+}

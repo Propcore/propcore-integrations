@@ -1,0 +1,94 @@
+[
+  {
+    "building_id": "b-a",
+    "building_name": "Tower A",
+    "floors": [
+      {
+        "floor_number": 13,
+        "cells": [
+          {
+            "line_key": "1",
+            "unit_id": "u-1301",
+            "unit_number": "1301",
+            "area": "86.00",
+            "rooms": 2,
+            "price": {
+              "mode": "visible",
+              "currency": "EUR",
+              "current": "265000.00",
+              "effective": "265000.00"
+            },
+            "status": {
+              "state": "available",
+              "core_status": "available",
+              "label": "Available",
+              "color": "#2e7d32"
+            }
+          },
+          {
+            "line_key": "2",
+            "unit_id": "u-1302",
+            "unit_number": "1302",
+            "area": "150.00",
+            "rooms": 4,
+            "price": {
+              "mode": "on_request",
+              "currency": "EUR"
+            },
+            "status": {
+              "state": "unavailable",
+              "core_status": "sold",
+              "label": "Sold",
+              "color": "#6b6b6b"
+            }
+          }
+        ]
+      },
+      {
+        "floor_number": 12,
+        "cells": [
+          {
+            "line_key": "1",
+            "unit_id": "u-1201",
+            "unit_number": "1201",
+            "area": "84.50",
+            "rooms": 2,
+            "price": {
+              "mode": "visible",
+              "currency": "EUR",
+              "current": "250000.00",
+              "effective": "237500.00",
+              "discount_pct": 5
+            },
+            "status": {
+              "state": "available",
+              "core_status": "available",
+              "label": "Available",
+              "color": "#2e7d32"
+            }
+          },
+          {
+            "line_key": "2",
+            "unit_id": "u-1202",
+            "unit_number": "1202",
+            "area": "120.00",
+            "rooms": 3,
+            "price": {
+              "mode": "visible",
+              "currency": "EUR",
+              "current": "410000.00",
+              "effective": "389500.00",
+              "discount_pct": 5
+            },
+            "status": {
+              "state": "unavailable",
+              "core_status": "reserved",
+              "label": "Reserved",
+              "color": "#b26a00"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
