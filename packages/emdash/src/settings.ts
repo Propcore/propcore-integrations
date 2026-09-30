@@ -7,7 +7,7 @@ export interface Settings {
 }
 
 // Dots are allowed: a site can live at a deeper name such as astra-demo.demo.propcore.page.
-const SLUG = /^[a-z0-9.-]{1,80}$/;
+export const SLUG = /^[a-z0-9.-]{1,80}$/;
 
 export function siteUrl(slug: string): string {
   return `https://${slug}.propcore.page`;
