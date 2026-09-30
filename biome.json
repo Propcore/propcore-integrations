@@ -7,7 +7,8 @@
       "!**/node_modules",
       "!**/*.gen.ts",
       "!**/.astro",
-      "!**/.wrangler"
+      "!**/.wrangler",
+      "!**/.claude"
     ]
   },
   "formatter": { "indentStyle": "space", "indentWidth": 2, "lineWidth": 100 },
