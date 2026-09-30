@@ -1,0 +1,1200 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Propcore headless API",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "https://{site}/",
+      "variables": {
+        "site": {
+          "default": "example.propcore.page"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/ai/manifest.md": {
+      "get": {
+        "responses": {
+          "204": {
+            "description": "Default Response"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/manifest.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/openapi.json": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/views/{view_key}/results": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "view_key",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicViewResults"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/units/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicUnitDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/listings/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicListingDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/projects": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PublicProject"
+                      }
+                    }
+                  },
+                  "required": ["items"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/projects/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicProjectDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/projects/{id}/stacking": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicStackingBuilding"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/units": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PublicUnitCard"
+                      }
+                    }
+                  },
+                  "required": ["items"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/listings": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PublicListingCard"
+                      }
+                    }
+                  },
+                  "required": ["items"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/promotions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PublicPromotion"
+                      }
+                    }
+                  },
+                  "required": ["items"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/ai/promotions/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicPromotion"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PublicViewResults": {
+        "type": "object",
+        "properties": {
+          "view": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "name": {},
+              "entity": {
+                "type": "string",
+                "enum": ["unit", "listing"]
+              }
+            },
+            "required": ["key", "name", "entity"],
+            "additionalProperties": false
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/PublicUnitCard"
+                },
+                {
+                  "$ref": "#/components/schemas/PublicListingCard"
+                }
+              ]
+            }
+          }
+        },
+        "required": ["view", "items"],
+        "additionalProperties": false
+      },
+      "PublicUnitDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PublicUnitCard"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "characteristic_sections": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSection"
+                }
+              },
+              "media": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {}
+                }
+              }
+            },
+            "required": ["characteristic_sections", "media"],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PublicListingDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PublicListingCard"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "characteristic_sections": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSection"
+                }
+              },
+              "media": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {}
+                }
+              }
+            },
+            "required": ["characteristic_sections", "media"],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PublicProject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "status_label": {
+            "$ref": "#/components/schemas/LabelText"
+          },
+          "status_color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currency": {
+            "type": "string"
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {}
+            }
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unit_summary": {
+            "$ref": "#/components/schemas/UnitSummary"
+          },
+          "price_range": {
+            "$ref": "#/components/schemas/PriceRange"
+          },
+          "price_per_sqm_range": {
+            "$ref": "#/components/schemas/PriceRange"
+          },
+          "area_range": {
+            "$ref": "#/components/schemas/PriceRange"
+          },
+          "active_promotion_count": {
+            "type": "number"
+          },
+          "building_count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "status_label",
+          "status_color",
+          "currency",
+          "media",
+          "published_at",
+          "unit_summary",
+          "area_range",
+          "active_promotion_count",
+          "building_count"
+        ],
+        "additionalProperties": false
+      },
+      "PublicProjectDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PublicProject"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "characteristic_sections": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CharacteristicSection"
+                }
+              }
+            },
+            "required": ["characteristic_sections"],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PublicStackingBuilding": {
+        "type": "object",
+        "properties": {
+          "building_id": {
+            "type": "string"
+          },
+          "building_name": {
+            "type": "string"
+          },
+          "floors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicStackingFloor"
+            }
+          }
+        },
+        "required": ["building_id", "building_name", "floors"],
+        "additionalProperties": false
+      },
+      "PublicUnitCard": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "unit_number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "project_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "building_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "floor_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rooms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price": {
+            "$ref": "#/components/schemas/PublicPrice"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PublicStatusBadge"
+          },
+          "promotion_badges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabelText"
+            }
+          },
+          "cover_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "unit_number",
+          "type",
+          "project_id",
+          "building_id",
+          "floor_number",
+          "rooms",
+          "area",
+          "price",
+          "status",
+          "promotion_badges"
+        ],
+        "additionalProperties": false
+      },
+      "PublicListingCard": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "project_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "floor_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rooms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "price": {
+            "$ref": "#/components/schemas/PublicPrice"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PublicStatusBadge"
+          },
+          "cover_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "reference",
+          "project_id",
+          "floor_number",
+          "rooms",
+          "area",
+          "price",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "PublicPromotion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "$ref": "#/components/schemas/LabelText"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LabelText"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "discount": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": ["percent", "amount"]
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": ["kind", "value", "currency"],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "affected_unit_count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description",
+          "discount",
+          "starts_at",
+          "ends_at",
+          "affected_unit_count"
+        ],
+        "additionalProperties": false
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": ["error", "code"],
+        "additionalProperties": false
+      },
+      "CharacteristicSection": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string",
+            "enum": ["unit", "building", "project"]
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicGroup"
+            }
+          }
+        },
+        "required": ["level", "groups"],
+        "additionalProperties": false
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2
+          },
+          "admin1": {
+            "$ref": "#/components/schemas/AddressComponent"
+          },
+          "admin2": {
+            "$ref": "#/components/schemas/AddressComponent"
+          },
+          "admin3": {
+            "$ref": "#/components/schemas/AddressComponent"
+          },
+          "admin4": {
+            "$ref": "#/components/schemas/AddressComponent"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "house_number": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "postal_code": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "unparsed": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "required": ["country"],
+        "additionalProperties": false
+      },
+      "LabelText": {
+        "type": "string"
+      },
+      "UnitSummary": {
+        "type": "object",
+        "properties": {
+          "available": {
+            "type": "number"
+          },
+          "reserved": {
+            "type": "number"
+          },
+          "sold": {
+            "type": "number"
+          },
+          "blocked": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": ["available", "reserved", "sold", "blocked", "total"],
+        "additionalProperties": false
+      },
+      "PriceRange": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": ["min", "max"],
+        "additionalProperties": false
+      },
+      "PublicStackingFloor": {
+        "type": "object",
+        "properties": {
+          "floor_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cells": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicStackingCell"
+            }
+          }
+        },
+        "required": ["floor_number", "cells"],
+        "additionalProperties": false
+      },
+      "PublicPrice": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": ["visible", "on_request"]
+          },
+          "currency": {
+            "type": "string"
+          },
+          "current": {
+            "type": "string"
+          },
+          "effective": {
+            "type": "string"
+          },
+          "discount_pct": {
+            "type": "number"
+          },
+          "per_sqm": {
+            "type": "string"
+          }
+        },
+        "required": ["mode", "currency"],
+        "additionalProperties": false
+      },
+      "PublicStatusBadge": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": ["available", "unavailable"]
+          },
+          "core_status": {
+            "type": "string",
+            "enum": ["available", "reserved", "sold"]
+          },
+          "label": {
+            "$ref": "#/components/schemas/LabelText"
+          },
+          "color": {
+            "type": "string"
+          }
+        },
+        "required": ["state", "core_status"],
+        "additionalProperties": false
+      },
+      "CharacteristicGroup": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "$ref": "#/components/schemas/LabelText"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacteristicField"
+            }
+          }
+        },
+        "required": ["key", "label", "fields"],
+        "additionalProperties": false
+      },
+      "AddressComponent": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": ["key", "label"],
+        "additionalProperties": false
+      },
+      "GeoPoint": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lon": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          }
+        },
+        "required": ["lat", "lon"],
+        "additionalProperties": false
+      },
+      "PublicStackingCell": {
+        "type": "object",
+        "properties": {
+          "line_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unit_id": {
+            "type": "string"
+          },
+          "unit_number": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "rooms": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "cover_url": {
+            "type": "string"
+          },
+          "price": {
+            "$ref": "#/components/schemas/PublicPrice"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PublicStatusBadge"
+          }
+        },
+        "required": ["line_key", "status"],
+        "additionalProperties": false
+      },
+      "CharacteristicField": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "$ref": "#/components/schemas/LabelText"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "$ref": "#/components/schemas/LabelText"
+              }
+            ]
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": ["key", "label", "value"],
+        "additionalProperties": false
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

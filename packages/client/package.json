@@ -1,0 +1,48 @@
+{
+  "name": "@propcore/client",
+  "version": "0.1.0",
+  "description": "Typed fetch client for the Propcore headless catalog API",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Propcore/propcore-integrations",
+    "directory": "packages/client"
+  },
+  "homepage": "https://propcore.ai",
+  "keywords": [
+    "propcore",
+    "real-estate",
+    "catalog",
+    "api-client"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "openapi.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "generate": "openapi-typescript openapi.json -o src/types.gen.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.0",
+    "ajv-formats": "^3.0.0",
+    "openapi-typescript": "^7.9.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}
