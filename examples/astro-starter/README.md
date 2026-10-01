@@ -3,7 +3,7 @@
 A small real estate site: projects, a unit grid with a rooms filter, unit pages, and a live
 availability grid per project. Clone it, set two variables, deploy.
 
-Live demo: https://propcore-astro-demo.xdm-inside.workers.dev — built from this starter against a Propcore demo workspace.
+Live demo: https://astro-demo.propcore.ai — built from this starter against a Propcore demo workspace.
 
     cp .env.example .env     # PROPCORE_SITE + PROPCORE_KEY from Propcore Admin → Storefronts → AI Source
     pnpm install

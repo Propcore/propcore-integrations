@@ -10,7 +10,7 @@ availability — into a website built with an external tool.
 | [`packages/emdash`](packages/emdash) | EmDash CMS plugin (registry: `propcore` by propcore.bsky.social) |
 | [`examples/astro-starter`](examples/astro-starter) | A small real estate site to clone |
 
-Live demo: https://propcore-astro-demo.xdm-inside.workers.dev — built from the starter against a Propcore demo workspace.
+Live demo: https://astro-demo.propcore.ai — built from the starter against a Propcore demo workspace.
 
 ## How it works
 
